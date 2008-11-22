@@ -2,7 +2,7 @@
 Summary:	Samsung Unified Linux Driver
 Name:		samsung-unified-linux-driver
 Version:	2.0.52
-Release:	0.2
+Release:	0.3
 License:	other
 Group:		Applications
 Source0:	http://org.downloadcenter.samsung.com/downloadfile/ContentsFile.aspx?VPath=DR/200810/20081024151424062/UnifiedLinuxDriver.tar.gz
@@ -47,8 +47,6 @@ Requires:	sane
 
 %build
 cd Linux/%{drvarch}/at_root/%{_libdir}
-ln -s libmfp.so.1.0.1 libmfp.so.1
-ln -s libmfp.so.1 libmfp.so
 
 %install
 install -d \
@@ -68,6 +66,8 @@ install -m 0644 \
 install -m 0755 \
 	Linux/%{drvarch}/at_root/%{_libdir}/libmfp* \
 	$RPM_BUILD_ROOT%{_libdir}
+ln -s libmfp.so.1.0.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so.1
+ln -s libmfp.so.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so
 install -m 0755 \
 	Linux/%{drvarch}/at_root/usr/lib/cups/filter/* \
 	$RPM_BUILD_ROOT%{_cupsfilterdir}
