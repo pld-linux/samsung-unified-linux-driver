@@ -1,3 +1,4 @@
+
 %define		shortname	samsung-unified
 Summary:	Samsung Unified Linux Driver
 Name:		samsung-unified-linux-driver
@@ -24,6 +25,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sanelibdir		%{_libdir}/sane
 
 %description
+Samsung Unified Linux Driver
 
 %package -n cups-driver-%{shortname}
 Summary:	CUPS part of Samsung Unified Linux Driver
@@ -33,6 +35,7 @@ Requires:	cups
 Requires:	ghostscript
 
 %description -n cups-driver-%{shortname}
+CUPS part of Samsung Unified Linux Driver
 
 %package -n sane-driver-%{shortname}
 Summary:	SANE part of Samsung Unified Linux Driver
@@ -41,37 +44,39 @@ Requires:	%{name} = %{version}
 Requires:	sane
 
 %description -n sane-driver-%{shortname}
+SANE part of Samsung Unified Linux Driver
 
 %prep
 %setup -q -n cdroot
 
 %build
-cd Linux/%{drvarch}/at_root/%{_libdir}
+test -d Linux/%{drvarch}/at_root/%{_libdir}
 
 %install
+rm -rf $RPM_BUILD_ROOT
 install -d \
 	$RPM_BUILD_ROOT%{_sysconfdir}/sane.d/ \
 	$RPM_BUILD_ROOT%{_sanelibdir} \
 	$RPM_BUILD_ROOT%{_cupsfilterdir} \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/cms/
-install -m 0644 \
+install \
 	Linux/noarch/at_root/%{_sysconfdir}/sane.d/smfp.conf \
 	$RPM_BUILD_ROOT%{_sysconfdir}/sane.d/
-install -m 0644 \
+install \
 	Linux/noarch/at_opt/share/ppd/*.ppd \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/
-install -m 0644 \
+install \
 	Linux/noarch/at_opt/share/ppd/cms/* \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/cms/
-install -m 0755 \
+install \
 	Linux/%{drvarch}/at_root/%{_libdir}/libmfp* \
 	$RPM_BUILD_ROOT%{_libdir}
 ln -s libmfp.so.1.0.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so.1
 ln -s libmfp.so.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so
-install -m 0755 \
-	Linux/%{drvarch}/at_root/usr/lib/cups/filter/* \
+install \
+	Linux/%{drvarch}/at_root%{_libdir}/cups/filter/* \
 	$RPM_BUILD_ROOT%{_cupsfilterdir}
-install -m 0755 \
+install \
 	Linux/%{drvarch}/at_root/%{_sanelibdir}/libsane-smfp* \
 	$RPM_BUILD_ROOT%{_sanelibdir}
 
@@ -80,7 +85,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libmfp*
+%attr(755,root,root) %{_libdir}/libmfp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmfp.so.?
 
 %files -n cups-driver-%{shortname}
 %defattr(644,root,root,755)
@@ -90,5 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_cupsppddir}/samsung/cms/*
 
 %files -n sane-driver-%{shortname}
+%defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 %attr(755,root,root) %{_sanelibdir}/libsane-smfp*
