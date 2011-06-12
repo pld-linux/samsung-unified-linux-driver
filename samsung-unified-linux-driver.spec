@@ -2,12 +2,12 @@
 %define		shortname	samsung-unified
 Summary:	Samsung Unified Linux Driver
 Name:		samsung-unified-linux-driver
-Version:	2.0.52
-Release:	0.4
+Version:	3.0.80
+Release:	0.1
 License:	other
 Group:		Applications
-Source0:	http://org.downloadcenter.samsung.com/downloadfile/ContentsFile.aspx?VPath=DR/200810/20081024151424062/UnifiedLinuxDriver.tar.gz
-# Source0-md5:	ee5d4012a5a89bc647eaca0cf071b359
+Source0:	http://www.bchemnet.com/suldr/UnifiedLinuxDriver-3.00.80.tar.gz
+# Source0-md5:	4bcf37e3c71a4f16424eb5f47e93420e
 BuildRequires:	cups-devel
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
