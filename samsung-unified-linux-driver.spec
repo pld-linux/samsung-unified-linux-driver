@@ -93,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_cupsfilterdir}/*
 %dir %{_cupsppddir}/samsung/
 %{_cupsppddir}/samsung/*.ppd
+%dir %{_cupsppddir}/samsung/cms
 %{_cupsppddir}/samsung/cms/*
 
 %files -n sane-driver-%{shortname}
