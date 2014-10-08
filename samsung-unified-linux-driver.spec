@@ -1,14 +1,37 @@
+#
+# Conditional build:
+%bcond_with	license_agreement	# generates package
 
 %define		shortname	samsung-unified
+%define		base_name	samsung-unified-linux-driver
+%define		rel 1
 Summary:	Samsung Unified Linux Driver
-Name:		samsung-unified-linux-driver
+%if %{with license_agreement}
+Name:		%{base_name}
+%else
+Name:		%{base_name}-installer
+%endif
 Version:	1.00.27.04
 Release:	0.1
-License:	other
+Release:	%{rel}%{?with_license_agreement:wla}
+License:	non-distributable
 Group:		Applications
+%if %{with license_agreement}
 Source0:	ULD_V%{version}.tar.gz
-# Source0-md5:	5be0d4cc76cd204c02e89bd3799683bf
+# NoSource0-md5:	5be0d4cc76cd204c02e89bd3799683bf
+NoSource:	0
+%else
+Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
+# Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
+%endif
+%if %{with license_agreement}
+BuildRequires:	rpmbuild(macros) >= 1.357
+BuildRequires:	sed >= 4.0
 BuildRequires:	cups-devel
+%else
+Requires:	rpm-build-tools >= 4.4.37
+Requires:	rpmbuild(macros) >= 1.544
+%endif
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Epoch:		1
@@ -86,9 +109,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%if %{without license_agreement}
+%attr(755,root,root) %{_bindir}/%{base_name}.install
+%{_datadir}/%{base_name}
+%else
 %attr(755,root,root) %{_libdir}/libmfp.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmfp.so.?
+%endif
 
+%if %{with license_agreement}
 %files -n cups-driver-%{shortname}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_cupsfilterdir}/*
@@ -101,3 +130,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 %attr(755,root,root) %{_sanelibdir}/libsane-smfp*
+%endif
