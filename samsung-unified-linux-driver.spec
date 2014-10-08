@@ -1,3 +1,7 @@
+# TODO:
+#	- consider arm arch
+#	- don't build bogus debuginfo
+#	- finish --without license_agreement
 #
 # Conditional build:
 %bcond_with	license_agreement	# generates package
