@@ -115,8 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
 %else
-%attr(755,root,root) %{_libdir}/libmfp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmfp.so.?
+%attr(755,root,root) %{_libdir}/libscmssc.so
 %endif
 
 %if %{with license_agreement}
