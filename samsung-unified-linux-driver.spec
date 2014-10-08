@@ -110,6 +110,7 @@ install \
 install \
 	%{drvarch}/smfpnetdiscovery \
 	$RPM_BUILD_ROOT%{_bindir}
+%{__cp} noarch/license/eula.txt eula.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -120,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{base_name}.install
 %{_datadir}/%{base_name}
 %else
+%doc eula.txt
 %attr(755,root,root) %{_libdir}/libscmssc.so
 %endif
 
