@@ -1,6 +1,5 @@
 # TODO:
 #	- consider arm arch
-#	- finish --without license_agreement
 #
 # Conditional build:
 %bcond_with	license_agreement	# generates package
@@ -23,7 +22,7 @@ Source0:	http://downloadcenter.samsung.com/content/DR/201407/20140709160646372/U
 # NoSource0-md5:	5be0d4cc76cd204c02e89bd3799683bf
 NoSource:	0
 %else
-Source3:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
+Source1:	http://svn.pld-linux.org/svn/license-installer/license-installer.sh
 # Source3-md5:	329c25f457fea66ec502b7ef70cb9ede
 %endif
 %if %{with license_agreement}
@@ -74,13 +73,29 @@ Requires:	sane-backend
 SANE part of Samsung Unified Linux Driver
 
 %prep
+%if %{with license_agreement}
 %setup -q -n uld
 
 %build
 test -d %{drvarch}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%if %{without license_agreement}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{base_name}}
+
+sed -e '
+	s/@BASE_NAME@/%{base_name}/g
+	s/@TARGET_CPU@/%{_target_cpu}/g
+	s-@VERSION@-%{version}-g
+	s-@RELEASE@-%{release}-g
+	s,@SPECFILE@,%{_datadir}/%{base_name}/%{base_name}.spec,g
+	s,@DATADIR@,%{_datadir}/%{base_name},g
+' %{SOURCE1} > $RPM_BUILD_ROOT%{_bindir}/%{base_name}.install
+
+cp -p %{_specdir}/%{base_name}.spec $RPM_BUILD_ROOT%{_datadir}/%{base_name}
+%else
 install -d \
 	$RPM_BUILD_ROOT%{_bindir} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/sane.d/ \
@@ -111,6 +126,7 @@ install \
 	%{drvarch}/smfpnetdiscovery \
 	$RPM_BUILD_ROOT%{_bindir}
 %{__cp} noarch/license/eula.txt eula.txt
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
