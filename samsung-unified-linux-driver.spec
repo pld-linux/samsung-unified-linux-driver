@@ -68,7 +68,7 @@ CUPS part of Samsung Unified Linux Driver
 Summary:	SANE part of Samsung Unified Linux Driver
 Group:		Applications
 Requires:	%{name} = %{version}
-Requires:	sane
+Requires:	sane-backend
 
 %description -n sane-driver-%{shortname}
 SANE part of Samsung Unified Linux Driver
