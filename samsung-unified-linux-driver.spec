@@ -6,7 +6,7 @@
 
 %define		shortname	samsung-unified
 %define		base_name	samsung-unified-linux-driver
-%define		rel	0.3
+%define		rel	0.4
 Summary:	Samsung Unified Linux Driver
 %if %{with license_agreement}
 Name:		%{base_name}
@@ -67,7 +67,7 @@ CUPS part of Samsung Unified Linux Driver
 Summary:	SANE part of Samsung Unified Linux Driver
 Group:		Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	sane-backend
+Requires:	sane-backends
 
 %description -n sane-driver-%{shortname}
 SANE part of Samsung Unified Linux Driver
