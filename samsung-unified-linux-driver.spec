@@ -83,25 +83,28 @@ install -d \
 	$RPM_BUILD_ROOT%{_cupsfilterdir} \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/cms/
 install \
-	Linux/noarch/at_root/%{_sysconfdir}/sane.d/smfp.conf \
+	noarch/%{_sysconfdir}/smfp.conf \
 	$RPM_BUILD_ROOT%{_sysconfdir}/sane.d/
 install \
-	Linux/noarch/at_opt/share/ppd/*.ppd \
+	noarch/share/ppd/*.ppd \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/
 install \
-	Linux/noarch/at_opt/share/ppd/cms/* \
+	noarch/share/ppd/cms/* \
 	$RPM_BUILD_ROOT%{_cupsppddir}/samsung/cms/
 install \
-	Linux/%{drvarch}/at_root/%{_libdir}/libmfp* \
+	%{drvarch}/libscmssc.so \
 	$RPM_BUILD_ROOT%{_libdir}
-ln -s libmfp.so.1.0.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so.1
-ln -s libmfp.so.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so
+#ln -s libmfp.so.1.0.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so.1
+#ln -s libmfp.so.1 $RPM_BUILD_ROOT%{_libdir}/libmfp.so
 install \
-	Linux/%{drvarch}/at_root%{_libdir}/cups/filter/* \
+	%{drvarch}/{pstosecps,rastertospl} \
 	$RPM_BUILD_ROOT%{_cupsfilterdir}
 install \
-	Linux/%{drvarch}/at_root/%{_sanelibdir}/libsane-smfp* \
+	%{drvarch}/%{_sanelibdir}/libsane-smfp* \
 	$RPM_BUILD_ROOT%{_sanelibdir}
+install \
+	%{drvarch}/smfpnetdiscovery
+	$RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
