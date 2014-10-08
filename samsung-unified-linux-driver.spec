@@ -1,6 +1,5 @@
 # TODO:
 #	- consider arm arch
-#	- don't build bogus debuginfo
 #	- finish --without license_agreement
 #
 # Conditional build:
@@ -8,7 +7,7 @@
 
 %define		shortname	samsung-unified
 %define		base_name	samsung-unified-linux-driver
-%define		rel 0.1
+%define		rel	0.2
 Summary:	Samsung Unified Linux Driver
 %if %{with license_agreement}
 Name:		%{base_name}
@@ -50,6 +49,7 @@ Epoch:		1
 %define		_cupsppddir		%{_cupsdatadir}/model
 %define 	_cupsfilterdir	%{_cupslibdir}/filter
 %define		_sanelibdir		%{_libdir}/sane
+%define		_enable_debug_packages	0
 
 %description
 Samsung Unified Linux Driver
