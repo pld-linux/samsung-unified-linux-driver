@@ -4,7 +4,7 @@
 
 %define		shortname	samsung-unified
 %define		base_name	samsung-unified-linux-driver
-%define		rel 1
+%define		rel 0.1
 Summary:	Samsung Unified Linux Driver
 %if %{with license_agreement}
 Name:		%{base_name}
@@ -12,7 +12,6 @@ Name:		%{base_name}
 Name:		%{base_name}-installer
 %endif
 Version:	1.00.27.04
-Release:	0.1
 Release:	%{rel}%{?with_license_agreement:wla}
 License:	non-distributable
 Group:		Applications
