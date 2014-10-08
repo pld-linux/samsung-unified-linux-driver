@@ -100,10 +100,10 @@ install \
 	%{drvarch}/{pstosecps,rastertospl} \
 	$RPM_BUILD_ROOT%{_cupsfilterdir}
 install \
-	%{drvarch}/%{_sanelibdir}/libsane-smfp* \
+	%{drvarch}/libsane-smfp* \
 	$RPM_BUILD_ROOT%{_sanelibdir}
 install \
-	%{drvarch}/smfpnetdiscovery
+	%{drvarch}/smfpnetdiscovery \
 	$RPM_BUILD_ROOT%{_bindir}
 
 %clean
