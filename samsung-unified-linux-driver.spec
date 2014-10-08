@@ -11,6 +11,7 @@ Source0:	ULD_V%{version}.tar.gz
 BuildRequires:	cups-devel
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Epoch:		1
 
 %ifarch %{ix86}
 %define	drvarch i386
