@@ -70,10 +70,10 @@ Requires:	sane
 SANE part of Samsung Unified Linux Driver
 
 %prep
-%setup -q -n cdroot
+%setup -q -n uld
 
 %build
-test -d Linux/%{drvarch}/at_root/%{_libdir}
+test -d %{drvarch}
 
 %install
 rm -rf $RPM_BUILD_ROOT
