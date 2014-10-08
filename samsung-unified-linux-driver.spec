@@ -19,7 +19,7 @@ Release:	%{rel}%{?with_license_agreement:wla}
 License:	non-distributable
 Group:		Applications
 %if %{with license_agreement}
-Source0:	ULD_V%{version}.tar.gz
+Source0:	http://downloadcenter.samsung.com/content/DR/201407/20140709160646372/ULD_V%{version}.tar.gz
 # NoSource0-md5:	5be0d4cc76cd204c02e89bd3799683bf
 NoSource:	0
 %else
