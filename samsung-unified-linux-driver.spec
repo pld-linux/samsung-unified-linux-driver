@@ -78,6 +78,7 @@ test -d %{drvarch}
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d \
+	$RPM_BUILD_ROOT%{_bindir} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/sane.d/ \
 	$RPM_BUILD_ROOT%{_sanelibdir} \
 	$RPM_BUILD_ROOT%{_cupsfilterdir} \
@@ -121,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with license_agreement}
 %files -n cups-driver-%{shortname}
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/smfpnetdiscovery
 %attr(755,root,root) %{_cupsfilterdir}/*
 %dir %{_cupsppddir}/samsung/
 %{_cupsppddir}/samsung/*.ppd
